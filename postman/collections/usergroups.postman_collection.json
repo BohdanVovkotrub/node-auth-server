@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "ef3209b6-7917-4537-8c5e-1b46e8ab68f7",
+		"name": "usergroups",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11511149",
+		"_collection_link": "https://crimson-crescent-675783.postman.co/workspace/slm-ingest-2~0ec6bbf5-bbdb-4661-a057-6d454dfda986/collection/11511149-ef3209b6-7917-4537-8c5e-1b46e8ab68f7?action=share&creator=11511149&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "createNew",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtAccessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"group1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}{{usergroupRouteV1}}",
+					"host": [
+						"{{server}}{{usergroupRouteV1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtAccessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server}}{{usergroupRouteV1}}",
+					"host": [
+						"{{server}}{{usergroupRouteV1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOne",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtAccessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server}}{{usergroupRouteV1}}/{{usergroup}}",
+					"host": [
+						"{{server}}{{usergroupRouteV1}}"
+					],
+					"path": [
+						"{{usergroup}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateOne",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtAccessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}{{usergroupRouteV1}}/administrators",
+					"host": [
+						"{{server}}{{usergroupRouteV1}}"
+					],
+					"path": [
+						"administrators"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteOne",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtAccessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server}}{{usergroupRouteV1}}/{{usergroup}}",
+					"host": [
+						"{{server}}{{usergroupRouteV1}}"
+					],
+					"path": [
+						"{{usergroup}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMembershipUsers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtAccessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server}}{{usergroupRouteV1}}/{{usergroup}}/users",
+					"host": [
+						"{{server}}{{usergroupRouteV1}}"
+					],
+					"path": [
+						"{{usergroup}}",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setMembershipUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtAccessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"{{user}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}{{usergroupRouteV1}}/{{usergroup}}/users",
+					"host": [
+						"{{server}}{{usergroupRouteV1}}"
+					],
+					"path": [
+						"{{usergroup}}",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeMembershipUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwtAccessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server}}{{usergroupRouteV1}}/{{usergroup}}/users/{{user}}",
+					"host": [
+						"{{server}}{{usergroupRouteV1}}"
+					],
+					"path": [
+						"{{usergroup}}",
+						"users",
+						"{{user}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

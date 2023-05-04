@@ -1,0 +1,10 @@
+[
+    {
+        "strategyName": "no-password",
+        "userLogin": "Administrator"
+    },
+    {
+        "strategyName": "no-password",
+        "userLogin": "User"
+    }
+]

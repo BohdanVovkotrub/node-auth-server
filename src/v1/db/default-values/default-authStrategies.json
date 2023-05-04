@@ -1,0 +1,18 @@
+[
+    {
+        "name": "password",
+        "description": "Authentication by login (or email) and local password"
+    },
+    {
+        "name": "no-password",
+        "description": "Authentication by login or email. Password or any verification is not needed."
+    },
+    {
+        "name": "email-verification-code",
+        "description": "Authentication by login (or email) and random secret code sent to user's email."
+    },
+    {
+        "name": "ldap",
+        "description": "Authentication by login (or email) and password of LDAP domain."
+    }
+]

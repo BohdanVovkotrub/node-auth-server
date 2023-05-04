@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Administrator",
+        "description": "It is Role with full rights."
+    },
+    {
+        "name": "User",
+        "description": "It is Role with minimum rights (only 'read')."
+    }
+]

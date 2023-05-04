@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Administrators",
+        "description": "It is default usergroup for role 'Administrator'.",
+        "email": null
+    },
+    {
+        "name": "Users",
+        "description": "It is default usergroup for role 'User'.",
+        "email": null
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "usergroupName": "Administrators",
+        "userLogin": "Administrator"
+    },
+    {
+        "usergroupName": "Users",
+        "userLogin": "User"
+    }
+]

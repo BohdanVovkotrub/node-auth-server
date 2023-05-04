@@ -1,0 +1,51 @@
+{
+	"id": "feee32b5-3f56-46e1-81e4-fdf420698585",
+	"values": [
+		{
+			"key": "server",
+			"value": "http://localhost:3000",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userRouteV1",
+			"value": "/api/v1/users",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "authRouteV1",
+			"value": "/api/v1/auth",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "jwtAccessToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI0NDc4YjA3LWM2OWEtNDdjNS1iNGRjLWIwYTI3M2I3MmM2ZSIsImxvZ2luIjoiQWRtaW5pc3RyYXRvciIsImVtYWlsIjoidm92a290cnViLmJvQHNsbS51YSIsImlhdCI6MTY4MjU5Mjc0NCwiZXhwIjoxNjgyNTkyNzc0fQ.Wxz3pA4w70bYLYSGYEjwJI73q-jMU-rYKI_MlahsdNw",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "user",
+			"value": "administrator",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "usergroup",
+			"value": "administrators",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "usergroupRouteV1",
+			"value": "/api/v1/usergroups",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2023-04-28T17:48:09.201Z",
+	"_postman_exported_using": "Postman/10.13.5"
+}

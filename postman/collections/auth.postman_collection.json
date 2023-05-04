@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "42004008-e3a0-4098-80e3-5d99c858f9c8",
+		"name": "auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11511149",
+		"_collection_link": "https://crimson-crescent-675783.postman.co/workspace/slm-ingest-2~0ec6bbf5-bbdb-4661-a057-6d454dfda986/collection/11511149-42004008-e3a0-4098-80e3-5d99c858f9c8?action=share&creator=11511149&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"Administrator\",\r\n    \"strategy\": \"password\",\r\n    \"password\": \"Qwerty123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}{{authRouteV1}}/login",
+					"host": [
+						"{{server}}{{authRouteV1}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify-code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\": \"Administrator\",\r\n    \"code\": \"4467\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}{{authRouteV1}}/verify-code",
+					"host": [
+						"{{server}}{{authRouteV1}}"
+					],
+					"path": [
+						"verify-code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{server}}{{authRouteV1}}/refresh",
+					"host": [
+						"{{server}}{{authRouteV1}}"
+					],
+					"path": [
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{server}}{{authRouteV1}}/logout",
+					"host": [
+						"{{server}}{{authRouteV1}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,32 @@
+[
+    {"name": "create_users", "description": "Allow to create new users." },
+    {"name": "read_users", "description": "Allow to read users." },
+    {"name": "update_users", "description": "Allow to update users." },
+    {"name": "delete_users", "description": "Allow to delete users." },
+
+    {"name": "set_memberships_between_users_and_usergroups", "description": "Allow to set memberships between users and usergroups."},
+    {"name": "get_memberships_between_users_and_usergroups", "description": "Allow to get memberships between users and usergroups."},
+    {"name": "remove_memberships_between_users_and_usergroups", "description": "Allow to remove memberships between users and usergroups."},
+
+    {"name": "set_memberships_between_users_and_auth_strategies", "description": "Allow to add authentication strategies to users."},
+    {"name": "get_memberships_between_users_and_auth_strategies", "description": "Allow to get authentication strategies to users."},
+    {"name": "remove_memberships_between_users_and_auth_strategies", "description": "Allow to remove authentication strategies to users."},
+
+    {"name": "create_usergroups", "description": "Allow to create new usergroups." },
+    {"name": "read_usergroups", "description": "Allow to read usergroups." },
+    {"name": "update_usergroups", "description": "Allow to update usergroups." },
+    {"name": "delete_usergroups", "description": "Allow to delete usergroups." },
+
+    {"name": "add_users_to_usergroups", "description": "Allow to add users to usergroups."},
+    {"name": "get_usergroups_of_user", "description": "Allow to get a list of usergroups the user is a member of."},
+    {"name": "remove_usergroups_of_user", "description": "Allow to remove membership of usergroups from users."},
+
+    {"name": "set_memberships_between_usergroups_and_roles", "description": "Allow to set memberships between usergroups and roles."},
+    {"name": "get_memberships_between_usergroups_and_roles", "description": "Allow to get memberships between usergroups and roles."},
+    {"name": "remove_memberships_between_usergroups_and_roles", "description": "Allow to remove memberships between usergroups and roles."},
+
+    {"name": "create_roles", "description": "Allow to create new roles." },
+    {"name": "read_roles", "description": "Allow to read roles." },
+    {"name": "update_roles", "description": "Allow to update roles." },
+    {"name": "delete_roles", "description": "Allow to delete roles." }
+]

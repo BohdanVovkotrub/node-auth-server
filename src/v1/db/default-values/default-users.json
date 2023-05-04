@@ -1,0 +1,11 @@
+[
+    {
+        "login": "Administrator",
+        "description": "It is default user with name 'Administrator' for usergroup 'Administrators' and role 'Administrator'.",
+        "email": "vovkotrub.bo@slm.ua"
+    },
+    {
+        "login": "User",
+        "description": "It is default user with name 'User' for usergroup 'Users' and role 'User'."
+    }
+]
