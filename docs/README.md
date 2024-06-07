@@ -5,79 +5,79 @@ ver.1.0.0 - 2023.05
 
 <div style="padding-top: 20px; padding-bottom: 50px;">
 
-## <span id="soderzhanie">Содержание</span> 
+## <span id="soderzhanie">Contents</span> 
 
-[<h3>1. Описание</h3>](#opisanie)
-[<h3>2. Требования</h3>](#trebovaniya)
-[<h3>3. Установка и настройка Базы данных</h3>](#installation_database)
-[<h3>3.1. Установка на MacOS</h3>](#installation_database_1)
-[<h3>3.1.1. Install Homebrew</h3>](#installation_database_1_1)
-[<h3>3.1.2. Install PostgreSQL 15</h3>](#installation_database_1_2)
-[<h3>3.1.3. Install PgAdmin4 (optional)</h3>](#installation_database_1_3)
-[<h3>3.1.4. How to remove Database</h3>](#installation_database_1_4)
-[<h3>4. Установка</h3>](#installation)
+[<h3>1. Description</h3>](#description)  
+[<h3>2. Requirements</h3>](#requirements)  
+[<h3>3. Database Installation and Setup</h3>](#installation_database)  
+[<h3>3.1. Installation on MacOS</h3>](#installation_database_1)  
+[<h3>3.1.1. Install Homebrew</h3>](#installation_database_1_1)  
+[<h3>3.1.2. Install PostgreSQL 15</h3>](#installation_database_1_2)  
+[<h3>3.1.3. Install PgAdmin4 (optional)</h3>](#installation_database_1_3)  
+[<h3>3.1.4. How to Remove Database</h3>](#installation_database_1_4)  
+[<h3>4. Installation</h3>](#installation)  
 
 <hr>
 </div>
 
-# <span id="opisanie">1. Описание</span> 
-### [<h6>↑ Вернуться к содержанию ↑</h6>](#soderzhanie) <br>
+# <span id="description">1. Description</span> 
+### [<h6>↑ Back to Contents ↑</h6>](#soderzhanie) <br>
 
-Будем называть наш <b>NODE-AUTH-SERVER</b> просто как <b>сервис</b> или <b>сервер</b> или <b>приложение</b>.
+We will refer to our <b>NODE-AUTH-SERVER</b> simply as <b>service</b> or <b>server</b> or <b>application</b>.
 <br><br>
-Это API сервер для аутентификации и авторизации пользователей.
+This is an API server for user authentication and authorization.
 
-Главные модули, вокруг которых написан наш сервис - <b>express</b> и <b>jsonwebtoken</b>.
+The main modules around which our service is written are <b>express</b> and <b>jsonwebtoken</b>.
 
-Используются такие стратегии аутентификации:
-- <b>password</b> - это локальная стратегия, где требуется от пользователя его логин или email и пароль. Все данные пользователя хранятся в базе данных сервиса.
-- <b>no-password</b> - от пользователя требуется только его логин или email.
-- <b>email-verification-code</b> - от пользователя требуется только его логин или email. Далее ему на email приходит сообщение с рандомным кодом. Пользователь должен ввести этот код для завершения аутентификации.
-- <b>ldap</b> - от пользователя требуется его логин или email и доменный пароль. В базе данных сервиса хранится только логин и email. Далее, если такой логин зарегистрирован в нашем сервисе, то сервис обращается к LDAP-домену с логином пользователя и введенным паролем. Далее LDAP-домен отвечает успешно ли прошла аутентификация.
+The following authentication strategies are used:
+- <b>password</b> - this is a local strategy where the user is required to provide their login or email and password. All user data is stored in the service's database.
+- <b>no-password</b> - the user is only required to provide their login or email.
+- <b>email-verification-code</b> - the user is only required to provide their login or email. Then, a random code is sent to the user's email. The user must enter this code to complete the authentication.
+- <b>ldap</b> - the user is required to provide their login or email and domain password. Only the login and email are stored in the service's database. If such a login is registered in our service, the service contacts the LDAP domain with the user's login and entered password. The LDAP domain responds whether the authentication was successful.
 
-В случае не успеха - сервер отвечает со статусом ошибки на HTTP запрос пользователя, например '400 Bad request'.
-Если всё прошло успешно, то пользователь получает статус успеха '200 OK'. Также в ответе пользователь получит данные о себе `(userData)`, действия, которые он может выполнять `(accessActions)` и JWT-токены `(tokenData)` - `accessToken` и `refreshToken` соответственно. В `accessToken` также хранится `userData` и `accessActions`. Где хранить `accessToken` - клиент должен позаботиться сам - обычно это LocalStorage или Cookie. `RefreshToken` хранит минимальную информацию о пользователе, достаточную чтобы подтвержить `accessToken`. При ответе сервер сохраняет `refreshToken` в cookie пользователя.
+In case of failure, the server responds with an error status to the user's HTTP request, for example, '400 Bad request'.
+If everything is successful, the user receives a success status '200 OK'. Additionally, the user will receive their data `(userData)`, actions they can perform `(accessActions)`, and JWT tokens `(tokenData)` - `accessToken` and `refreshToken` respectively. The `accessToken` also stores `userData` and `accessActions`. The client must take care of where to store the `accessToken` - usually this is LocalStorage or Cookie. The `refreshToken` stores minimal user information, enough to confirm the `accessToken`. Upon response, the server saves the `refreshToken` in the user's cookie.
 
-В качестве базы данных используеттся PostgreSQL. Для облегчения работы с ней в NodeJS используется ORM модуль `Sequelize`.
+PostgreSQL is used as the database. The `Sequelize` ORM module is used in NodeJS to simplify working with it.
 
-При запуске сервис синхронизируется с базой данных и, если еще не создано, создаёт записи по-умолчанию. Например, при первом запуске создает пользователя администратора.
-При синхронизации все необходимые таблицы в Базе Данных создадутся сами. От вас требуется только создать пустую БД.
+When launched, the service synchronizes with the database and creates default records if not yet created. For example, it creates an administrator user on the first run.
+During synchronization, all necessary tables in the database will be created automatically. You only need to create an empty database.
 
 <br>
 
-# <span id="trebovaniya">2. Требования</span>
-### [<h6>↑ Вернуться к содержанию ↑</h6>](#soderzhanie) <br>
+# <span id="requirements">2. Requirements</span>
+### [<h6>↑ Back to Contents ↑</h6>](#soderzhanie) <br>
 
-- База данных PostgreSQL [<h4>See how to install DB PostgreSQL</h4>](#installation_database)
+- PostgreSQL Database [<h4>See how to install PostgreSQL Database</h4>](#installation_database)
 - Node.JS
 
 
-# <br><span id="installation_database">3. Установка и настройка Базы данных</span>
-### [<h6>↑ Вернуться к содержанию ↑</h6>](#soderzhanie) <br>
+# <br><span id="installation_database">3. Database Installation and Setup</span>
+### [<h6>↑ Back to Contents ↑</h6>](#soderzhanie) <br>
 
-The database is a PostgreSQL 15.<br>
+The database is PostgreSQL 15.<br>
 
-## <br><span id="installation_database_1">3.1. Установка Базы данных на MacOS
+## <br><span id="installation_database_1">3.1. Installing the Database on MacOS
 
 ### <br><span id="installation_database_1_1">3.1.1. Install Homebrew
 
-1.  Visit an [official website of Homebrew](https://brew.sh/) and copy-paste in a Terminal installing command.
-    Now this command looks like this:
+1.  Visit the [official Homebrew website](https://brew.sh/) and copy-paste the installation command into the Terminal.
+    Currently, the command looks like this:
     ```
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     ```
-    It was installed homebrew to your system.
+    This will install Homebrew on your system.
     <br>
-2.  After installing homebrew you need to add a brew to $PATH by two commands:
+2.  After installing Homebrew, you need to add brew to $PATH by running these two commands:
     ```
     (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> /Users/user/.zprofile
     eval "$(/usr/local/bin/brew shellenv)"
     ```
-3.  Run following command to make sure everythig is fine:
+3.  Run the following command to ensure everything is fine:
     ```
     brew doctor
     ```
-    If thats fine you'll get a message `Your system is ready to brew.`
+    If everything is fine, you'll get the message `Your system is ready to brew.`
 
 
 ### <br><span id="installation_database_1_2">3.1.2. Install PostgreSQL 15
@@ -100,11 +100,11 @@ The database is a PostgreSQL 15.<br>
     ```
     brew services start postgresql@15
     ```
-4. Connect to PostgreSQL using PSQL tool in Terminal:
+4. Connect to PostgreSQL using the PSQL tool in the Terminal:
     ```
     psql postgres
     ```
-5. Create new Database 'my_database' with owner user 'owner_username' and password 'your_password':
+5. Create a new Database 'my_database' with owner user 'owner_username' and password 'your_password':
     ```
     CREATE USER owner_username WITH ENCRYPTED PASSWORD 'your_password';
     CREATE DATABASE my_database
@@ -124,50 +124,49 @@ The database is a PostgreSQL 15.<br>
 
 ### <br><span id="installation_database_1_3">3.1.3. Install PgAdmin4 _(optional)_ 
 
-<br>For managing database with GUI you can install a `PgAdmin4` utility.<br><br>
+<br>To manage the database with a GUI, you can install the `PgAdmin4` utility.<br><br>
 
+1.  Go to https://www.pgadmin.org/download/pgadmin-4-macos/ and download the latest version (currently `pgadmin4-6.21.dmg`).
 
-1.  Go to https://www.pgadmin.org/download/pgadmin-4-macos/ and download the last version (now is `pgadmin4-6.21.dmg`).
+2.  Run the downloaded `pgadmin4-6.21.dmg` and drag the app to the Application folder link - this will copy pgadmin4 to Applications.
 
-2.  Run downloaded `pgadmin4-6.21.dmg` and drag app to an Application folder link - it will copy pgadmin4 to Applications.
+3.  Run PgAdmin 4 from Launchpad.
 
-3.  Run PgAdmin 4 from lauchpad
+4.  PgAdmin4 will initially ask you to create a password. Create it.
 
-4.  Firstly PgAdmin4 will ask to create a password. Create it.
-
-5.  Right-click to Servers and register new server.
-    In General input name, for example 'postgres'.
-    In Connection input 
-    address - localhost (IP address of database server)
+5.  Right-click on Servers and register a new server.
+    In General, input the name, for example 'postgres'.
+    In Connection, input 
+    address - localhost (IP address of the database server)
     port - 5432
     maintenance database - postgres
-    username - postgres (or maybe your localmachine user, for example 'user')
+    username - postgres (or maybe your local machine user, for example 'user')
 
-## <br><span id="installation_database_1_4">3.1.4. How to remove Database
+## <br><span id="installation_database_1_4">3.1.4. How to Remove Database
 <br>
 
-1.  Connect to PostgreSQL using PSQL tool in Terminal:
+1.  Connect to PostgreSQL using the PSQL tool in the Terminal:
     ```
     psql postgres
     ```
 
-2.  Remove database using PSQL tool in Terminal:
+2.  Remove the database using the PSQL tool in the Terminal:
     ```
     DROP DATABASE IF EXISTS my_database;
     ```
 
 
-# <br><span id="installation">4. Установка</span>
-### [<h6>↑ Вернуться к содержанию ↑</h6>](#soderzhanie) <br>
+# <br><span id="installation">4. Installation</span>
+### [<h6>↑ Back to Contents ↑</h6>](#soderzhanie) <br>
 
-1. Скачать это с GitHub и перейти в папку.
+1. Download this from GitHub and navigate to the folder.
     ```
-    git clone <адрес-этого-приложения-на-гитхабе>
+    git clone <repository-url>
     cd NODE-AUTH-SERVER
     ```
-2. Создайте файл `.env` и заполните его данные по примеру как в `.env-example`
+2. Create a `.env` file and fill in the data as per the `.env-example`.
 
-3. Перейдите в `./src/v1/db/default-values/` и заполните данные, которые должны быть в базе данных по-умолчанию. Например пользователь 'USER', задайте ему пароль и например группа 'USERS'. Чтобы пользователь USER поместить в группу USERS нужно в `./src/v1/db/default-values/junctions/default-usergroup_users.json` добавить запись:
+3. Navigate to `./src/v1/db/default-values/` and fill in the default data that should be in the database. For example, the user 'USER', set a password for them and a group 'USERS'. To add the user USER to the group USERS, add a record to `./src/v1/db/default-values/junctions/default-usergroup_users.json`:
 
     ```
     [
@@ -180,22 +179,22 @@ The database is a PostgreSQL 15.<br>
     ]
     ```
 
-    И тогда, при запуске сервера, данные, которые будут в файлах из папки `./src/v1/db/default-values/` будут синхронизированы с базой данных.
+    When the server starts, the data in the files from the `./src/v1/db/default-values/` folder will be synchronized with the database.
 
-4. После того, как внесли конфигурацию в `.env` и внесли дефолтные данные в `./src/v1/db/default-values/`, теперь мы можем запустить сервер. Но сначала нужно загрузить все дополнительные пакеты Node.JS:
+4. After configuring the `.env` file and setting the default data in `./src/v1/db/default-values/`, we can now start the server. But first, we need to install all necessary Node.JS packages:
 
-    Загружаем все дополнительные пакеты Node.JS:
+    Install all necessary Node.JS packages:
 
     ```
     npm install
     ```
 
-    Запускаем сервер:
+    Start the server:
 
     ```
     npm run start
     ```
-    или 
+    or 
     ```
     node start
     ```
